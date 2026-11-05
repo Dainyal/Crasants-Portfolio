@@ -35,10 +35,13 @@ export default function App() {
     setShowLogin(false)
   }
 
-  async function logout() {
-    await fetch('/api/logout', { method: 'POST', headers: auth })
+  function logout() {
+    fetch('/api/logout', { method: 'POST', headers: auth }).catch(() => {})
     sessionStorage.removeItem('token')
     setToken(null)
+    setVisitorView(false)
+    setEditing(null)
+    setError('')
   }
 
   async function upload(e) {
