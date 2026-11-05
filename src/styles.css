@@ -79,3 +79,10 @@ figcaption button:hover { background: #c93a1a; color: #fff; box-shadow: none; }
 button.link { background: none; color: var(--muted); text-decoration: underline; font-weight: 400; }
 button.link:hover { box-shadow: none; transform: none; color: #c4600f; }
 figcaption .date { font-size: .8rem; color: #c4600f; }
+header .actions { display: flex; gap: .5rem; }
+figcaption .actions, .edit .actions { display: flex; gap: .5rem; margin-top: .4rem; }
+figcaption .actions button, .edit .actions button { margin-top: 0; padding: .35rem .8rem; font-size: .85rem; }
+button.secondary, figcaption button.secondary { background: transparent; color: #c4600f; border: 1px solid #c4600f; }
+button.secondary:hover { background: #c4600f; color: #fff; box-shadow: none; }
+.edit { display: flex; flex-direction: column; gap: .5rem; padding: .9rem 1rem 1rem; flex: 1; }
+.edit input { width: 100%; }

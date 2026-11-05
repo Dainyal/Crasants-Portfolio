@@ -74,6 +74,18 @@ app.post('/api/artworks', requireAuth, upload.single('image'), (req, res) => {
   res.status(201).json(item)
 })
 
+app.patch('/api/artworks/:id', requireAuth, (req, res) => {
+  const items = load()
+  const item = items.find((i) => i.id === req.params.id)
+  if (!item) return res.status(404).json({ error: 'Not found' })
+  const { title, description, madeOn } = req.body ?? {}
+  if (title !== undefined) item.title = String(title).slice(0, 100) || 'Untitled'
+  if (description !== undefined) item.description = String(description).slice(0, 500)
+  if (madeOn !== undefined) item.madeOn = /^\d{4}-\d{2}-\d{2}$/.test(madeOn) ? madeOn : ''
+  save(items)
+  res.json(item)
+})
+
 app.delete('/api/artworks/:id', requireAuth, (req, res) => {
   const items = load()
   const item = items.find((i) => i.id === req.params.id)

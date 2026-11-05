@@ -6,6 +6,9 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false)
   const [error, setError] = useState('')
   const [selected, setSelected] = useState(null)
+  const [visitorView, setVisitorView] = useState(false)
+  const [editing, setEditing] = useState(null)
+  const isArtist = token && !visitorView
 
   const refresh = () =>
     fetch('/api/artworks').then((r) => r.json()).then(setArtworks).catch(() => setError('Could not load artwork'))
@@ -50,6 +53,23 @@ export default function App() {
     refresh()
   }
 
+  async function saveEdit(e) {
+    e.preventDefault()
+    setError('')
+    const f = new FormData(e.target)
+    const res = await fetch(`/api/artworks/${editing}`, {
+      method: 'PATCH',
+      headers: { ...auth, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: f.get('title'), description: f.get('description'), madeOn: f.get('madeOn') }),
+    })
+    if (!res.ok) {
+      handleAuthError(res)
+      return setError('Could not save changes')
+    }
+    setEditing(null)
+    refresh()
+  }
+
   async function remove(id) {
     if (!confirm('Delete this artwork?')) return
     const res = await fetch(`/api/artworks/${id}`, { method: 'DELETE', headers: auth })
@@ -78,13 +98,18 @@ export default function App() {
       <header>
         <h1>Crasants Portfolio</h1>
         {token ? (
-          <button onClick={logout}>Log out</button>
+          <div className="actions">
+            <button onClick={() => { setVisitorView((v) => !v); setEditing(null) }}>
+              {visitorView ? 'Back to artist view' : 'View as visitor'}
+            </button>
+            <button onClick={logout}>Log out</button>
+          </div>
         ) : (
           <button onClick={() => setShowLogin(true)}>Artist login</button>
         )}
       </header>
       <main>
-        {token && (
+        {isArtist && (
           <form onSubmit={upload} className="panel">
             <input name="title" placeholder="Title" maxLength={100} />
             <input name="description" placeholder="Description" maxLength={500} />
@@ -99,12 +124,29 @@ export default function App() {
           {artworks.map((a) => (
             <figure key={a.id}>
               <img src={`/uploads/${a.file}`} alt={a.title} onClick={() => setSelected(a)} />
-              <figcaption>
-                <strong>{a.title}</strong>
-                {a.description && <span>{a.description}</span>}
-                {a.madeOn && <span className="date">{new Date(a.madeOn + 'T00:00:00').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
-                {token && <button onClick={() => remove(a.id)}>Delete</button>}
-              </figcaption>
+              {isArtist && editing === a.id ? (
+                <form className="edit" onSubmit={saveEdit}>
+                  <input name="title" defaultValue={a.title} maxLength={100} placeholder="Title" />
+                  <input name="description" defaultValue={a.description} maxLength={500} placeholder="Description" />
+                  <input name="madeOn" type="date" defaultValue={a.madeOn || ''} aria-label="Date created" />
+                  <div className="actions">
+                    <button>Save</button>
+                    <button type="button" className="secondary" onClick={() => setEditing(null)}>Cancel</button>
+                  </div>
+                </form>
+              ) : (
+                <figcaption>
+                  <strong>{a.title}</strong>
+                  {a.description && <span>{a.description}</span>}
+                  {a.madeOn && <span className="date">{new Date(a.madeOn + 'T00:00:00').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+                  {isArtist && (
+                    <div className="actions">
+                      <button className="secondary" onClick={() => setEditing(a.id)}>Edit</button>
+                      <button onClick={() => remove(a.id)}>Delete</button>
+                    </div>
+                  )}
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>
