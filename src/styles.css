@@ -1,7 +1,7 @@
 :root {
-  --orange: #ed872d;
-  --orange-light: #f4a460;
-  --orange-dark: #c9691a;
+  --orange: #f79a3a;
+  --orange-light: #ffbf80;
+  --orange-dark: #f59a3e;
   --bg: #130c07;
   --surface: #1f140c;
   --border: #3a2514;
@@ -35,14 +35,14 @@ button, input {
   border: 1px solid var(--border); background: var(--surface); color: inherit;
   transition: border-color .2s, box-shadow .2s, transform .2s, background .2s;
 }
-input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(237, 135, 45, .25); }
+input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(247, 154, 58, .25); }
 input[type=file] { padding: .45rem; }
 button {
   cursor: pointer; font-weight: 600; border: none;
   background: linear-gradient(135deg, var(--orange-light), var(--orange-dark));
   color: #1a0d03;
 }
-button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(237, 135, 45, .35); }
+button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(247, 154, 58, .35); }
 header button { background: transparent; color: var(--orange-light); border: 1px solid var(--orange); }
 header button:hover { background: var(--orange); color: #1a0d03; }
 .panel {
@@ -57,7 +57,7 @@ figure {
   border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
   transition: transform .25s, box-shadow .25s, border-color .25s;
 }
-figure:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: 0 12px 30px rgba(237, 135, 45, .25); }
+figure:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: 0 12px 30px rgba(247, 154, 58, .25); }
 figure img { width: 100%; display: block; cursor: zoom-in; }
 figcaption { display: flex; flex-direction: column; gap: .35rem; padding: .9rem 1rem 1rem; }
 figcaption strong { color: var(--orange-light); }
@@ -68,12 +68,12 @@ figcaption button:hover { background: #ff6b4a; color: #1a0d03; box-shadow: none;
   position: fixed; inset: 0; background: rgba(10, 5, 2, .92); backdrop-filter: blur(6px);
   display: flex; align-items: center; justify-content: center; cursor: zoom-out;
 }
-.lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 12px; box-shadow: 0 0 60px rgba(237, 135, 45, .3); }
+.lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 12px; box-shadow: 0 0 60px rgba(247, 154, 58, .3); }
 .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 .login-box {
   display: flex; flex-direction: column; gap: .75rem; width: 320px; padding: 2rem;
   background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(237, 135, 45, .15);
+  box-shadow: 0 20px 60px rgba(247, 154, 58, .15);
 }
 .login-box h1 { text-align: center; }
 button.link { background: none; color: var(--muted); text-decoration: underline; font-weight: 400; }
