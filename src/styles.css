@@ -2,17 +2,17 @@
   --orange: #f79a3a;
   --orange-light: #ffbf80;
   --orange-dark: #f58f2b;
-  --bg: #130c07;
-  --surface: #1f140c;
-  --border: #3a2514;
-  --text: #fff3e8;
-  --muted: #c9a98c;
+  --bg: #ffe3c4;
+  --surface: #fff4e6;
+  --border: #f5c999;
+  --text: #3b2412;
+  --muted: #8a5a33;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 15% -10%, #3a1d08 0%, var(--bg) 45%) fixed;
+  background: radial-gradient(circle at 15% -10%, #fff1de 0%, var(--bg) 55%) fixed;
   color: var(--text);
   min-height: 100vh;
 }
@@ -20,13 +20,13 @@ header {
   position: sticky; top: 0; z-index: 10;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1rem 2rem;
-  background: rgba(19, 12, 7, .75);
+  background: rgba(255, 227, 196, .8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 h1 {
   margin: 0; font-size: 1.6rem; font-weight: 800; letter-spacing: -.02em;
-  background: linear-gradient(90deg, var(--orange-light), var(--orange));
+  background: linear-gradient(90deg, #e8741a, #f59a3e);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
@@ -43,14 +43,14 @@ button {
   color: #1a0d03;
 }
 button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(247, 154, 58, .35); }
-header button { background: transparent; color: var(--orange-light); border: 1px solid var(--orange); }
+header button { background: transparent; color: #c4600f; border: 1px solid var(--orange); }
 header button:hover { background: var(--orange); color: #1a0d03; }
 .panel {
   display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; padding: 1rem;
   background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
 }
 .panel input[name=title], .panel input[name=description] { flex: 1 1 200px; }
-.error { color: #ff6b4a; }
+.error { color: #c93a1a; }
 .grid { columns: 280px; column-gap: 1.25rem; }
 figure {
   margin: 0 0 1.25rem; break-inside: avoid; background: var(--surface);
@@ -60,10 +60,10 @@ figure {
 figure:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: 0 12px 30px rgba(247, 154, 58, .25); }
 figure img { width: 100%; display: block; cursor: zoom-in; }
 figcaption { display: flex; flex-direction: column; gap: .35rem; padding: .9rem 1rem 1rem; }
-figcaption strong { color: var(--orange-light); }
+figcaption strong { color: #c4600f; }
 figcaption span { color: var(--muted); font-size: .9rem; }
-figcaption button { align-self: flex-start; margin-top: .4rem; padding: .35rem .8rem; font-size: .85rem; background: transparent; color: #ff6b4a; border: 1px solid #ff6b4a; }
-figcaption button:hover { background: #ff6b4a; color: #1a0d03; box-shadow: none; }
+figcaption button { align-self: flex-start; margin-top: .4rem; padding: .35rem .8rem; font-size: .85rem; background: transparent; color: #c93a1a; border: 1px solid #c93a1a; }
+figcaption button:hover { background: #c93a1a; color: #fff; box-shadow: none; }
 .lightbox {
   position: fixed; inset: 0; background: rgba(10, 5, 2, .92); backdrop-filter: blur(6px);
   display: flex; align-items: center; justify-content: center; cursor: zoom-out;
@@ -77,4 +77,4 @@ figcaption button:hover { background: #ff6b4a; color: #1a0d03; box-shadow: none;
 }
 .login-box h1 { text-align: center; }
 button.link { background: none; color: var(--muted); text-decoration: underline; font-weight: 400; }
-button.link:hover { box-shadow: none; transform: none; color: var(--orange-light); }
+button.link:hover { box-shadow: none; transform: none; color: #c4600f; }
