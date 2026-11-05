@@ -57,6 +57,22 @@ export default function App() {
     refresh()
   }
 
+  if (showLogin && !token) {
+    return (
+      <div className="login-screen">
+        <form onSubmit={login} className="login-box">
+          <h1>Artist login</h1>
+          <input name="password" type="password" placeholder="Password" required autoFocus />
+          <button>Log in</button>
+          {error && <p className="error">{error}</p>}
+          <button type="button" className="link" onClick={() => { setShowLogin(false); setError('') }}>
+            Back to portfolio
+          </button>
+        </form>
+      </div>
+    )
+  }
+
   return (
     <>
       <header>
@@ -64,16 +80,10 @@ export default function App() {
         {token ? (
           <button onClick={logout}>Log out</button>
         ) : (
-          <button onClick={() => setShowLogin((s) => !s)}>Artist login</button>
+          <button onClick={() => setShowLogin(true)}>Artist login</button>
         )}
       </header>
       <main>
-        {showLogin && !token && (
-          <form onSubmit={login} className="panel">
-            <input name="password" type="password" placeholder="Password" required autoFocus />
-            <button>Log in</button>
-          </form>
-        )}
         {token && (
           <form onSubmit={upload} className="panel">
             <input name="title" placeholder="Title" maxLength={100} />
