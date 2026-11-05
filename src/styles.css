@@ -51,15 +51,15 @@ header button:hover { background: var(--orange); color: #1a0d03; }
 }
 .panel input[name=title], .panel input[name=description] { flex: 1 1 200px; }
 .error { color: #c93a1a; }
-.grid { columns: 280px; column-gap: 1.25rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
 figure {
-  margin: 0 0 1.25rem; break-inside: avoid; background: var(--surface);
+  margin: 0; display: flex; flex-direction: column; background: var(--surface);
   border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
   transition: transform .25s, box-shadow .25s, border-color .25s;
 }
 figure:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: 0 12px 30px rgba(247, 154, 58, .25); }
-figure img { width: 100%; display: block; cursor: zoom-in; }
-figcaption { display: flex; flex-direction: column; gap: .35rem; padding: .9rem 1rem 1rem; }
+figure img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; cursor: zoom-in; }
+figcaption { flex: 1; display: flex; flex-direction: column; gap: .35rem; padding: .9rem 1rem 1rem; }
 figcaption strong { color: #c4600f; }
 figcaption span { color: var(--muted); font-size: .9rem; }
 figcaption button { align-self: flex-start; margin-top: .4rem; padding: .35rem .8rem; font-size: .85rem; background: transparent; color: #c93a1a; border: 1px solid #c93a1a; }
