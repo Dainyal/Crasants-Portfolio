@@ -88,6 +88,7 @@ export default function App() {
           <form onSubmit={upload} className="panel">
             <input name="title" placeholder="Title" maxLength={100} />
             <input name="description" placeholder="Description" maxLength={500} />
+            <input name="madeOn" type="date" title="Date created (optional)" aria-label="Date created" />
             <input name="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp" required />
             <button>Upload</button>
           </form>
@@ -101,6 +102,7 @@ export default function App() {
               <figcaption>
                 <strong>{a.title}</strong>
                 {a.description && <span>{a.description}</span>}
+                {a.madeOn && <span className="date">{new Date(a.madeOn + 'T00:00:00').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
                 {token && <button onClick={() => remove(a.id)}>Delete</button>}
               </figcaption>
             </figure>

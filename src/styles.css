@@ -78,3 +78,4 @@ figcaption button:hover { background: #c93a1a; color: #fff; box-shadow: none; }
 .login-box h1 { text-align: center; }
 button.link { background: none; color: var(--muted); text-decoration: underline; font-weight: 400; }
 button.link:hover { box-shadow: none; transform: none; color: #c4600f; }
+figcaption .date { font-size: .8rem; color: #c4600f; }

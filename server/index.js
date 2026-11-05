@@ -66,6 +66,7 @@ app.post('/api/artworks', requireAuth, upload.single('image'), (req, res) => {
     id: crypto.randomUUID(),
     title: String(req.body.title || 'Untitled').slice(0, 100),
     description: String(req.body.description || '').slice(0, 500),
+    madeOn: /^\d{4}-\d{2}-\d{2}$/.test(req.body.madeOn || '') ? req.body.madeOn : '',
     file: req.file.filename,
     createdAt: new Date().toISOString(),
   }
