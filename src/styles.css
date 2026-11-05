@@ -12,7 +12,7 @@
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 15% -10%, #ba8c47 0%, var(--bg) 55%) fixed;
+  background: radial-gradient(circle at 15% -10%, #fff1de 0%, var(--bg) 55%) fixed;
   color: var(--text);
   min-height: 100vh;
 }
@@ -86,3 +86,13 @@ button.secondary, figcaption button.secondary { background: transparent; color: 
 button.secondary:hover { background: #c4600f; color: #fff; box-shadow: none; }
 .edit { display: flex; flex-direction: column; gap: .5rem; padding: .9rem 1rem 1rem; flex: 1; }
 .edit input { width: 100%; }
+header { display: grid; grid-template-columns: 1fr auto 1fr; }
+.brand { grid-column: 2; text-align: center; }
+.brand h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; margin-right: -.3em; }
+.brand p { margin: .15rem 0 0; font-size: .75rem; letter-spacing: .35em; text-transform: uppercase; color: #8a5a33; margin-right: -.35em; }
+.header-actions { grid-column: 3; justify-self: end; }
+@media (max-width: 640px) {
+  header { grid-template-columns: 1fr; justify-items: center; gap: .75rem; padding: 1rem; }
+  .brand, .header-actions { grid-column: 1; justify-self: center; }
+  .brand h1 { font-size: 1.5rem; }
+}

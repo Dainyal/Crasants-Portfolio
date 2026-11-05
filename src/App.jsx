@@ -103,16 +103,19 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>Crasants Portfolio</h1>
+        <div className="brand">
+          <h1>Crasants</h1>
+          <p>Digital Art Portfolio</p>
+        </div>
         {token ? (
-          <div className="actions">
+          <div className="actions header-actions">
             <button onClick={() => { setVisitorView((v) => !v); setEditing(null) }}>
               {visitorView ? 'Back to artist view' : 'View as visitor'}
             </button>
             <button onClick={logout}>Log out</button>
           </div>
         ) : (
-          <button onClick={() => setShowLogin(true)}>Artist login</button>
+          <button className="header-actions" onClick={() => setShowLogin(true)}>Artist login</button>
         )}
       </header>
       <main>
