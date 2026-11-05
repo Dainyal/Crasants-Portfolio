@@ -1,0 +1,15 @@
+body { margin: 0; font-family: system-ui, sans-serif; background: #111; color: #eee; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid #333; }
+h1 { margin: 0; font-size: 1.5rem; }
+main { padding: 2rem; }
+button, input { padding: .5rem .75rem; border-radius: 4px; border: 1px solid #444; background: #222; color: inherit; }
+button { cursor: pointer; }
+.panel { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.error { color: #f66; }
+.grid { columns: 280px; gap: 1rem; }
+figure { margin: 0 0 1rem; break-inside: avoid; background: #1b1b1b; border-radius: 6px; overflow: hidden; }
+figure img { width: 100%; display: block; cursor: zoom-in; }
+figcaption { display: flex; flex-direction: column; gap: .25rem; padding: .75rem; }
+figcaption span { color: #aaa; font-size: .9rem; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.9); display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox img { max-width: 95vw; max-height: 95vh; }
