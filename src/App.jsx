@@ -8,6 +8,7 @@ export default function App() {
   const [selected, setSelected] = useState(null)
   const [visitorView, setVisitorView] = useState(false)
   const [editing, setEditing] = useState(null)
+  const [editError, setEditError] = useState('')
   const isArtist = token && !visitorView
 
   const refresh = () =>
@@ -55,19 +56,25 @@ export default function App() {
 
   async function saveEdit(e) {
     e.preventDefault()
-    setError('')
+    setEditError('')
     const f = new FormData(e.target)
-    const res = await fetch(`/api/artworks/${editing}`, {
-      method: 'PATCH',
-      headers: { ...auth, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: f.get('title'), description: f.get('description'), madeOn: f.get('madeOn') }),
-    })
-    if (!res.ok) {
-      handleAuthError(res)
-      return setError('Could not save changes')
+    try {
+      const res = await fetch(`/api/artworks/${editing}`, {
+        method: 'PATCH',
+        headers: { ...auth, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: f.get('title'), description: f.get('description'), madeOn: f.get('madeOn') }),
+      })
+      if (!res.ok) {
+        handleAuthError(res)
+        if (res.status === 401) return setEditError('Your login expired. Please log in again.')
+        if (res.status === 404) return setEditError('Server not updated or entry missing. Restart the server and refresh.')
+        return setEditError('Could not save changes')
+      }
+      setEditing(null)
+      await refresh()
+    } catch {
+      setEditError('Could not reach the server')
     }
-    setEditing(null)
-    refresh()
   }
 
   async function remove(id) {
@@ -129,6 +136,7 @@ export default function App() {
                   <input name="title" defaultValue={a.title} maxLength={100} placeholder="Title" />
                   <input name="description" defaultValue={a.description} maxLength={500} placeholder="Description" />
                   <input name="madeOn" type="date" defaultValue={a.madeOn || ''} aria-label="Date created" />
+                  {editError && <p className="error">{editError}</p>}
                   <div className="actions">
                     <button>Save</button>
                     <button type="button" className="secondary" onClick={() => setEditing(null)}>Cancel</button>
@@ -141,7 +149,7 @@ export default function App() {
                   {a.madeOn && <span className="date">{new Date(a.madeOn + 'T00:00:00').toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
                   {isArtist && (
                     <div className="actions">
-                      <button className="secondary" onClick={() => setEditing(a.id)}>Edit</button>
+                      <button className="secondary" onClick={() => { setEditError(''); setEditing(a.id) }}>Edit</button>
                       <button onClick={() => remove(a.id)}>Delete</button>
                     </div>
                   )}
